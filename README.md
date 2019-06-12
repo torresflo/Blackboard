@@ -19,10 +19,12 @@
 ## Table of Contents
 
 * [Getting Started](#getting-started)
-  * [Installation](#installation)
+ * [Installation](#installation)
 * [Usage](#usage)
   * [Example](#example)
   * [Performance](#performance)
+    * [Blackboard ID](#blackboard-id)
+    * [Storing](#storing)
 * [Contributing](#contributing)
 * [License](#license)
 
@@ -49,6 +51,9 @@ blackboard.declare<int>(BLACKBOARD_ID("IDInteger"), 0);
 blackboard.declare<bool>(BLACKBOARD_ID("IDBool"), false);
 blackboard.declare<std::string>(BLACKBOARD_ID("IDString"), "My String");
 
+//You can register a callback to be informed when a value has changed
+blackboard.declare<int>(BLACKBOARD_ID("IDIntegerWithCallback"), [](const int& currentValue, const int& newValue) { /* ... */ });
+
 //Let's use the container
 blackboard.setValue<int>(BLACKBOARD_ID("IDInteger"), 42);
 int myInt = blackboard.getValue<int>(BLACKBOARD_ID("IDInteger"));
@@ -62,11 +67,21 @@ if(blackboard.exist<bool>(BLACKBOARD_ID("AnUnknonwID")))
     bool myBoolean = blackboard.getValue<bool>(BLACKBOARD_ID("AnUnknonwID")); //Can access safely
     //...
 }
-//...
+//Or to do this
+bool myBoolean = blackboard.getValue<bool>(BLACKBOARD_ID("AnUnknonwID"), false); //Will return the default value provided: false
 
+//...
 ```
 
 ### Performance
+
+#### Blackboard ID
+
+The generation of the Blackboard IDs are done with a hashing function that SHOULD be computed at compile time if the used string is constant.
+
+Sadly, some compilers may not optimize it. In this case, a couple of bit operations are done for each letter of the string. It means, the longer is the string, the longer it will be to generate the Blackboard ID.
+
+#### Storing
 
 Internally, the Blackboard is using `std::unordered_map` (you cannot access this container directly).
 
