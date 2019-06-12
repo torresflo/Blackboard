@@ -63,7 +63,7 @@ constexpr unsigned int hash<-1>(const char * string)
 	return 0xFFFFFFFF;
 }
 
-#define BLACKBOARD_ID(x) (Container::hash<sizeof(x) - 2>(x) ^ 0xFFFFFFFF)
+#define BLACKBOARD_ID(x) constexpr (Container::hash<sizeof(x) - 2>(x) ^ 0xFFFFFFFF)
 using BlackboardID = unsigned int;
 
 }

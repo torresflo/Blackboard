@@ -21,6 +21,12 @@ public:
 	}
 
 	template <typename T>
+	void declare(BlackboardID blackboardID, const typename ValueHandle<T>::ValueChangedCallback& callback, const T& initValue = T())
+	{
+		getBlackboardT<T>().declare(blackboardID, callback, initValue);
+	}
+
+	template <typename T>
 	bool exist(BlackboardID blackboardID) const
 	{
 		return getBlackboardT<T>().exist(blackboardID);
@@ -36,6 +42,12 @@ public:
 	const T& getValue(BlackboardID blackboardID) const
 	{
 		return getBlackboardT<T>().getValue(blackboardID);
+	}
+
+	template <typename T>
+	const T& getValue(BlackboardID blackboardID, const T& defaultValue) const
+	{
+		return getBlackboardT<T>().getValue(blackboardID, defaultValue);
 	}
 
 	template <typename T>
