@@ -12,7 +12,7 @@
     Usually, Blackboards are used in games in combination of a behavior tree to store and retrieve easily data or computation results.       <br/>
     But they can also be used as a usefull container that can store anything.
     <br />
-    <a href="https://github.com/torresflo/Kinect-Lab/issues">Report a bug or request a feature</a>
+    <a href="https://github.com/torresflo/Blackboard/issues">Report a bug or request a feature</a>
   </p>
 </p>
 
